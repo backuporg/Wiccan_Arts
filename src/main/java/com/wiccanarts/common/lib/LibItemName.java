@@ -18,6 +18,18 @@ public final class LibItemName {
 	public static final String SEED_GINGER = "seed_ginger";
 	public static final String KELP = "kelp";
 	public static final String SEED_KELP = "seed_kelp";
+	public static final String MINT = "mint";
+	public static final String SEED_MINT = "seed_mint";
+	public static final String WHITE_SAGE = "white_sage";
+	public static final String SEED_WHITE_SAGE = "seed_white_sage";
+	public static final String DANDELION_ROOT = "dandelion_root";
+	public static final String SEED_DANDELION_ROOT = "seed_dandelion_root";
+	public static final String ALLIUM = "allium";
+	public static final String SEED_ALLIUM = "seed_allium";
+	public static final String MANDRAKE_ROOT = "mandrake_root";
+	public static final String SEED_MANDRAKE_ROOT = "seed_mandrake_root";
+	public static final String LILAC = "lilac";
+	public static final String SEED_LILAC = "seed_lilac";
 
 	//Gems
 	public static final String GARNET = "garnet";
@@ -41,6 +53,7 @@ public final class LibItemName {
 
 	//Food Items
 	public static final String HONEY = "honey";
+	public static final String LAVENDER_SPRIG = "lavender_sprig";
 
 	//Ingredients
 	public static final String WAX = "wax";
@@ -49,6 +62,10 @@ public final class LibItemName {
 	public static final String BEEGRUB = "bee_grub";
 	public static final String BEEQUEEN = "bee_queen";
 	public static final String HONEYCOMB = "honeycomb";
+
+	//Staves
+	public static final String STAFFV1 = "staff_1"; //FIXME: What kind of name is this?
+	public static final String STAFFV2 = "staff_2";
 
 	//Baubles
 	public static final String RING = "ring";

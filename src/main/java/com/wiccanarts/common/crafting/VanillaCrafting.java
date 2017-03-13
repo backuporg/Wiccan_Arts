@@ -21,11 +21,6 @@ import java.util.List;
 public class VanillaCrafting {
 
 	public static void items() {
-		shaped().grid("MAA") //Test recipe
-				.map('M', Items.MELON)
-				.map('A', Items.APPLE)
-				.outputs(Items.SUGAR)
-				.setMirror(true).build();
 
 		for (ItemStack item : OreDictionary.getOres("nuggetSilver")) {
 			System.out.println(item);
@@ -34,34 +29,113 @@ public class VanillaCrafting {
 					.outputs(ModItems.SILVER_INGOT)
 					.setMirror(true).build();
 		}
+
+		for (ItemStack item : OreDictionary.getOres("gemBloodstone")) {
+			System.out.println(item);
+			shaped().grid("BBB", "BBB", "BBB")
+					.map('B', item)
+					.outputs(ModBlocks.BLOODSTONE_BLOCK)
+					.setMirror(true).build();
+		}
+
+		for (ItemStack item : OreDictionary.getOres("gemMoldavite")) {
+			System.out.println(item);
+			shaped().grid("MMM", "MMM", "MMM")
+					.map('M', item)
+					.outputs(ModBlocks.MOLDAVITE_BLOCK)
+					.setMirror(true).build();
+		}
+
+		for (ItemStack item : OreDictionary.getOres("blockMoldavite")) {
+			shapeless()
+					.add(item)
+					.outputs(new ItemStack(ModItems.MOLDAVITE, 9))
+					.build();
+		}
+
+		for (ItemStack item : OreDictionary.getOres("blockBloodstone")) {
+			shapeless()
+					.add(item)
+					.outputs(new ItemStack(ModItems.BLOODSTONE, 9))
+					.build();
+		}
+
+		shapeless()
+				.add(new ItemStack(Items.DYE, 1, 4))
+				.add(ModItems.JASPER)
+				.outputs(new ItemStack(ModItems.MALACHITE, 1))
+				.build();
+
+
+		shapeless()
+				.add(ModItems.WAX)
+				.add(ModItems.WAX)
+				.add(Items.STRING)
+				.outputs(new ItemStack(ModBlocks.CANDLE_SMALL, 1))
+				.build();
+
+		for (int i = 0; i < 16; i++) {
+			shapeless()
+					.add(ModItems.WAX)
+					.add(ModItems.WAX)
+					.add(Items.STRING)
+					.add(new ItemStack(Items.DYE, 1, i))
+					.outputs(new ItemStack(ModBlocks.CANDLE_SMALL, 1, i))
+					.build();
+		}
+
+		shapeless()
+				.add(ModItems.WAX)
+				.add(ModBlocks.CANDLE_SMALL)
+				.add(ModBlocks.CANDLE_SMALL)
+				.outputs(new ItemStack(ModBlocks.CANDLE_MEDIUM, 1))
+				.build();
+
+		for (int i = 0; i < 16; i++) {
+			shapeless()
+					.add(ModItems.WAX)
+					.add(ModBlocks.CANDLE_SMALL)
+					.add(ModBlocks.CANDLE_SMALL)
+					.add(new ItemStack(Items.DYE, 1, i))
+					.outputs(new ItemStack(ModBlocks.CANDLE_MEDIUM, 1, i))
+					.build();
+		}
+
+		shapeless()
+				.add(ModItems.WAX)
+				.add(ModBlocks.CANDLE_MEDIUM)
+				.add(ModBlocks.CANDLE_MEDIUM)
+				.outputs(new ItemStack(ModBlocks.CANDLE_LARGE, 1))
+				.build();
+
+		for (int i = 0; i < 16; i++) {
+			shapeless()
+					.add(ModItems.WAX)
+					.add(ModBlocks.CANDLE_MEDIUM)
+					.add(ModBlocks.CANDLE_MEDIUM)
+					.add(new ItemStack(Items.DYE, 1, i))
+					.outputs(new ItemStack(ModBlocks.CANDLE_LARGE, 1, i))
+					.build();
+		}
+
 		for (ItemStack item : OreDictionary.getOres("ingotSilver")) {
-			shaped().grid("I")
-					.map('I', item)
+			shapeless()
+					.add(item)
 					.outputs(new ItemStack(ModItems.SILVER_NUGGET, 9))
-					.setMirror(true).build();
+					.build();
 		}
 
-		for (ItemStack item : OreDictionary.getOres("gemMalachite")) {
-			shaped().grid("LJ")
-					.map('L', new ItemStack(Items.DYE, 1, 4))
-					.map('J', ModItems.JASPER)
-					.outputs(new ItemStack(ModItems.MALACHITE, 1))
-					.setMirror(true).build();
-
-		}
-		shaped().grid("B")
-				.map('B', ModBlocks.SILVER_BLOCK)
+		shapeless().add(ModBlocks.SILVER_BLOCK)
 				.outputs(new ItemStack(ModItems.SILVER_INGOT, 9))
-				.setMirror(true).build();
-
+				.build();
 	}
 
 	public static void blocks() {
+
 		shaped().grid("III", "III", "III")
 				.map('I', ModItems.SILVER_INGOT)
 				.outputs(ModBlocks.SILVER_BLOCK)
-				.setMirror(true).build();
-
+				.build();
 	}
 
 	private static ShapedRecipe shaped() {

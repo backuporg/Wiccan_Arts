@@ -1,15 +1,23 @@
 package com.wiccanarts.common.core;
 
 import com.wiccanarts.api.item.crop.Crop;
+import com.wiccanarts.common.block.BlockMod;
 import com.wiccanarts.common.block.ModBlocks;
 import com.wiccanarts.common.block.crop.*;
+import com.wiccanarts.common.block.tile.ModTiles;
+import com.wiccanarts.common.block.tools.BlockCandleLarge;
+import com.wiccanarts.common.block.tools.BlockCandleMedium;
+import com.wiccanarts.common.block.tools.BlockCandleSmall;
 import com.wiccanarts.common.block.tools.BlockKettle;
+import com.wiccanarts.common.item.ItemBlockColor;
 import com.wiccanarts.common.item.ItemMod;
 import com.wiccanarts.common.item.food.*;
 import com.wiccanarts.common.item.seed.ItemKelpSeed;
 import com.wiccanarts.common.item.seed.ItemSeed;
+import com.wiccanarts.common.lib.LibBlockName;
 import com.wiccanarts.common.lib.LibItemName;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.potion.Potion;
@@ -36,6 +44,12 @@ public class CommonRegistration {
 		registerCrop(BELLADONNA, ModBlocks.CROP_BELLADONNA, new ItemBelladonna(), LibItemName.SEED_BELLADONNA);
 		registerCrop(GINGER, ModBlocks.CROP_GINGER, new ItemGinger(), LibItemName.SEED_GINGER);
 		registerCrop(KELP, ModBlocks.CROP_KELP, new ItemKelp(), new ItemKelpSeed());
+		registerCrop(MINT, ModBlocks.CROP_MINT, new ItemMint(), LibItemName.SEED_MINT);
+		registerCrop(WHITE_SAGE, ModBlocks.CROP_WHITE_SAGE, new ItemWhiteSage(), LibItemName.SEED_WHITE_SAGE);
+		registerCrop(DANDELION_ROOT, ModBlocks.CROP_DANDELION_ROOT, new ItemDandelionRoot(), LibItemName.SEED_DANDELION_ROOT);
+		registerCrop(ALLIUM, ModBlocks.CROP_ALLIUM, new ItemAllium(), LibItemName.SEED_ALLIUM);
+		registerCrop(MANDRAKE_ROOT, ModBlocks.CROP_MANDRAKE_ROOT, new ItemMandrakeRoot(), LibItemName.SEED_MANDRAKE_ROOT);
+		registerCrop(LILAC, ModBlocks.CROP_LILAC, new ItemLilac(), LibItemName.SEED_LILAC);
 
 		CropRegistry.getFoods().forEach((crop, item) -> event.getRegistry().register(item));
 		CropRegistry.getSeeds().forEach((crop, item) -> event.getRegistry().register(item));
@@ -58,8 +72,14 @@ public class CommonRegistration {
 				new ItemMod(LibItemName.SILVER_POWDER),
 				new ItemMod(LibItemName.SILVER_INGOT),
 				new ItemMod(LibItemName.SILVER_NUGGET),
-				new ItemMod(LibItemName.HONEY)
-
+				new ItemMod(LibItemName.HONEY),
+				new ItemMod(LibItemName.SALT),
+				new ItemMod(LibItemName.WAX),
+				new ItemMod(LibItemName.LAVENDER_SPRIG),
+				new ItemMod(LibItemName.BEE),
+				new ItemMod(LibItemName.BEEGRUB),
+				new ItemMod(LibItemName.BEEQUEEN),
+				new ItemMod(LibItemName.HONEYCOMB)
 		);
 
 		//Item Blocks
@@ -69,9 +89,24 @@ public class CommonRegistration {
 				itemBlock(ModBlocks.CROP_BELLADONNA),
 				itemBlock(ModBlocks.CROP_GINGER),
 				itemBlock(ModBlocks.CROP_KELP),
+				itemBlock(ModBlocks.CROP_MINT),
+				itemBlock(ModBlocks.CROP_WHITE_SAGE),
+				itemBlock(ModBlocks.CROP_DANDELION_ROOT),
+				itemBlock(ModBlocks.CROP_ALLIUM),
+				itemBlock(ModBlocks.CROP_MANDRAKE_ROOT),
+				itemBlock(ModBlocks.CROP_LILAC),
+
 				itemBlock(ModBlocks.SILVER_BLOCK),
+				itemBlock(ModBlocks.MOLDAVITE_BLOCK),
 				itemBlock(ModBlocks.COQUINA),
-				itemBlock(ModBlocks.KETTLE)
+				itemBlock(ModBlocks.BLOODSTONE_BLOCK),
+				itemBlock(ModBlocks.KETTLE),
+				itemBlock(ModBlocks.SILVER_ORE),
+				itemBlock(ModBlocks.MOLDAVITE_ORE),
+				itemBlock(ModBlocks.NETHERSTEEL),
+				new ItemBlockColor(ModBlocks.CANDLE_LARGE),
+				new ItemBlockColor(ModBlocks.CANDLE_MEDIUM),
+				new ItemBlockColor(ModBlocks.CANDLE_SMALL)
 		);
 	}
 
@@ -81,14 +116,37 @@ public class CommonRegistration {
 
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
+		ModTiles.registerAll();
 		event.getRegistry().registerAll(
+				//Crops
 				new BlockAconitum(),
 				new BlockAsphodel(),
 				new BlockBelladonna(),
 				new BlockGinger(),
 				new BlockKelp(),
-				ModBlocks.SILVER_BLOCK,
-				new BlockKettle()
+				new BlockCrop(LibBlockName.CROP_MINT),
+				new BlockCrop(LibBlockName.CROP_WHITE_SAGE),
+				new BlockCrop(LibBlockName.CROP_DANDELION_ROOT),
+				new BlockCrop(LibBlockName.CROP_ALLIUM),
+				new BlockCrop(LibBlockName.CROP_MANDRAKE_ROOT),
+				new BlockCrop(LibBlockName.CROP_LILAC),
+
+				//Ore
+				new BlockMod(LibBlockName.SILVER_BLOCK, Material.IRON).setHardness(5.0F),
+				new BlockMod(LibBlockName.SILVER_ORE, Material.ROCK).setHardness(2.0F),
+				new BlockMod(LibBlockName.MOLDAVITE_BLOCK, Material.GLASS).setHardness(5.0F),
+				new BlockMod(LibBlockName.MOLDAVITE_ORE, Material.GLASS).setHardness(5.0F),
+				new BlockMod(LibBlockName.COQUINA, Material.ROCK).setHardness(5.0F),
+
+				//Normal Blocks
+				new BlockMod(LibBlockName.BLOODSTONE_BLOCK, Material.ROCK).setHardness(5.0F),
+				new BlockMod(LibBlockName.NETHERSTEEL, Material.IRON),
+
+				//Tool Blocks
+				new BlockKettle(),
+				new BlockCandleLarge(),
+				new BlockCandleMedium(),
+				new BlockCandleSmall()
 		);
 	}
 
@@ -105,7 +163,7 @@ public class CommonRegistration {
 	 * @param cropItem  The item this Crop will drop when harvested
 	 * @param seedName  The name id the new ItemSeed
 	 */
-	private static void registerCrop(Crop crop, BlockCrop blockCrop, ItemCrop cropItem, String seedName) {
+	private static void registerCrop(Crop crop, BlockCrop blockCrop, Item cropItem, String seedName) {
 		registerCrop(crop, blockCrop, cropItem, new ItemSeed(seedName, blockCrop, crop.getSoil()));
 	}
 
@@ -121,7 +179,7 @@ public class CommonRegistration {
 	 * @param cropItem  The item this Crop will drop when harvested
 	 * @param seedItem  The seed that will place the Crop
 	 */
-	private static void registerCrop(Crop crop, BlockCrop blockCrop, ItemCrop cropItem, Item seedItem) {
+	private static void registerCrop(Crop crop, BlockCrop blockCrop, Item cropItem, Item seedItem) {
 		blockCrop.setCrop(cropItem);
 		blockCrop.setSeed(seedItem);
 
