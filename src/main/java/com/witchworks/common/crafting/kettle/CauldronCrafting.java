@@ -43,6 +43,7 @@ public final class CauldronCrafting {
 		registerItemProcess(FluidRegistry.WATER, Items.LEATHER_CHESTPLATE, Items.LEATHER_CHESTPLATE, false);
 		registerItemProcess(FluidRegistry.WATER, Items.LEATHER_LEGGINGS, Items.LEATHER_LEGGINGS, false);
 		registerItemProcess(FluidRegistry.WATER, Items.LEATHER_BOOTS, Items.LEATHER_BOOTS, false);
+		registerItemProcess(FluidRegistry.WATER, Items.SHIELD, Items.SHIELD, false);
 		//Cooking with Oil
 		registerItemProcess(Fluids.MUNDANE_OIL, Items.PORKCHOP, Items.COOKED_PORKCHOP, true);
 		registerItemProcess(Fluids.MUNDANE_OIL, Items.MUTTON, Items.COOKED_MUTTON, true);
@@ -51,7 +52,8 @@ public final class CauldronCrafting {
 		registerItemProcess(Fluids.MUNDANE_OIL, Items.BEEF, Items.COOKED_BEEF, true);
 		registerItemProcess(Fluids.MUNDANE_OIL, Items.FISH, Items.COOKED_FISH, true);
 		registerItemProcess(Fluids.MUNDANE_OIL, Items.POTATO, Items.BAKED_POTATO, true);
-		//Coking with Water
+		registerItemProcessStack(Fluids.MUNDANE_OIL, getStack(Items.FISH, 1, 1), getStack(Items.COOKED_FISH, 1, 1), true);
+		//Cooking with Water
 		registerItemProcess(FluidRegistry.WATER, ModItems.EMPTY_HONEYCOMB, ModItems.WAX, true);
 		registerItemProcess(FluidRegistry.WATER, ModItems.HONEYCOMB, ModItems.HONEY, true);
 
@@ -69,11 +71,20 @@ public final class CauldronCrafting {
 				, getStack(Blocks.GOLD_BLOCK, 8), Items.APPLE);
 
 		registerItemRitual("cobweb", getStack(Blocks.WEB), 2
-				, getStack(Items.STRING, 4), Items.SPIDER_EYE);
+				, getStack(Items.STRING, 4), Items.SLIME_BALL);
+
+		registerItemRitual("string", getStack(Items.STRING, 6), 2
+				, getStack(ModItems.KENAF, 2));
 
 		//------------------------------------Brew Recipes------------------------------------//
 		registerBrewRecipe(BrewRegistry.Brew.LINGER, new BrewEffect(ModBrews.MARS_WATER, 500, 0)
 				, getStack(Items.field_191525_da, 6), Items.POISONOUS_POTATO, Items.ROTTEN_FLESH, ModItems.SALT, ModItems.JASPER);
+
+		registerBrewRecipe(BrewRegistry.Brew.LINGER, new BrewEffect(ModBrews.SKIN_TINT, 500, 0)
+				, getStack(Items.DYE, 1, 0), Items.NETHER_WART);
+
+		registerBrewRecipe(BrewRegistry.Brew.LINGER, new BrewEffect(ModBrews.SKIN_TINT, 500, 15)
+				, getStack(Items.DYE, 1, 15), Items.NETHER_WART);
 
 		//------------------------------------Custom Brew Creation------------------------------------//
 		registerEffect(getStack(ModItems.SALT)
@@ -166,6 +177,10 @@ public final class CauldronCrafting {
 	}
 
 	private static void registerItemProcess(Fluid fluid, Item in, Item out, boolean perfectMatch) {
+		CauldronRegistry.registerItemProcessing(fluid, in, out, perfectMatch);
+	}
+
+	private static void registerItemProcessStack(Fluid fluid, ItemStack in, ItemStack out, boolean perfectMatch) {
 		CauldronRegistry.registerItemProcessing(fluid, in, out, perfectMatch);
 	}
 
