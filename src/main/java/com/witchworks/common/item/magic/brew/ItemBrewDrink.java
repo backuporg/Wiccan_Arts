@@ -11,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionUtils;
@@ -85,9 +84,9 @@ public class ItemBrewDrink extends ItemBrew {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		BrewRegistry.getDefaults().get(DRINK).forEach((brew, brewEffect) ->
-				subItems.add(BrewUtils.createBrew(DRINK, brew))
+				items.add(BrewUtils.createBrew(DRINK, brew))
 		);
 	}
 }

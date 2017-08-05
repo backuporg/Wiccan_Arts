@@ -37,7 +37,7 @@ public final class WitchWorksCreativeTabs {
 
 		@SideOnly(Side.CLIENT)
 		void addItem(Item item) {
-			item.getSubItems(item, this, list);
+			item.getSubItems(this, list);
 		}
 
 		@Override
@@ -49,7 +49,7 @@ public final class WitchWorksCreativeTabs {
 		@SideOnly(Side.CLIENT)
 		void addBlock(Block block) {
 			final ItemStack stack = new ItemStack(block);
-			block.getSubBlocks(stack.getItem(), this, list);
+			block.getSubBlocks(this, list);
 		}
 
 
@@ -146,6 +146,7 @@ public final class WitchWorksCreativeTabs {
 			addItem(ModItems.eye_of_old);
 			addItem(ModItems.heart);
 			addItem(ModItems.envenomed_fang);
+			addItem(ModItems.dimensional_sand);
 		}
 	}
 

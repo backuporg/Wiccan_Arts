@@ -229,7 +229,7 @@ public final class VanillaCrafting {
 
 		shaped().grid("N N", "ISI", "III")
 				.map('I', Items.IRON_INGOT)
-				.map('N', Items.field_191525_da)
+				.map('N', Items.IRON_NUGGET)
 				.map('S', ModItems.silver_ingot)
 				.outputs(ModBlocks.cauldron)
 				.build();
@@ -321,8 +321,9 @@ public final class VanillaCrafting {
 				throw new IllegalArgumentException("You have to specify ingredients for the recipe!");
 			if (output == null) throw new IllegalArgumentException("Output not specified!");
 
-			final ShapelessOreRecipe recipe = new ShapelessOreRecipe(output, ingredients.toArray());
-			CraftingManager.getInstance().getRecipeList().add(recipe);
+			//Fixme: Everything.
+			//final ShapelessOreRecipe recipe = new ShapelessOreRecipe(output, ingredients.toArray());
+			//CraftingManager.getInstance().getRecipeList().add(recipe);
 		}
 	}
 }

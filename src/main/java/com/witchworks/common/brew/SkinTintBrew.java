@@ -4,9 +4,9 @@ import com.witchworks.api.brew.IBrew;
 import com.witchworks.api.brew.IBrewRenderLiving;
 import com.witchworks.client.ResourceLocations;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.EntityLivingBase;
@@ -54,7 +54,7 @@ public class SkinTintBrew implements IBrew, IBrewRenderLiving {
 	public void renderHUD(int x, int y, Minecraft mc, int amplifier) {
 		mc.renderEngine.bindTexture(ResourceLocations.BREW_TEXTURES);
 		final Tessellator tessellator = Tessellator.getInstance();
-		final VertexBuffer buf = tessellator.getBuffer();
+		final BufferBuilder buf = tessellator.getBuffer();
 		GlStateManager.color(1F, 1F, 1F, 1F);
 		final float f = 0.00390625F;
 
@@ -73,7 +73,7 @@ public class SkinTintBrew implements IBrew, IBrewRenderLiving {
 		GlStateManager.pushMatrix();
 
 		EnumDyeColor dye = EnumDyeColor.byDyeDamage(Math.min(amplifier, EnumDyeColor.values().length - 1));
-		int rgb = dye.getMapColor().colorValue;
+		int rgb = dye.getColorValue();
 
 		float r = (rgb >>> 16 & 0xFF) / 256.0F;
 		float g = (rgb >>> 8 & 0xFF) / 256.0F;
@@ -96,7 +96,7 @@ public class SkinTintBrew implements IBrew, IBrewRenderLiving {
 		GlStateManager.pushMatrix();
 
 		EnumDyeColor dye = EnumDyeColor.byDyeDamage(Math.min(amplifier, EnumDyeColor.values().length - 1));
-		int rgb = dye.getMapColor().colorValue;
+		int rgb = dye.getColorValue();
 
 		float r = (rgb >>> 16 & 0xFF) / 256.0F;
 		float g = (rgb >>> 8 & 0xFF) / 256.0F;
