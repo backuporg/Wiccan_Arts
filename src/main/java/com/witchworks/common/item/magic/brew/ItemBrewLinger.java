@@ -2,6 +2,7 @@ package com.witchworks.common.item.magic.brew;
 
 import com.witchworks.api.BrewRegistry;
 import com.witchworks.api.brew.BrewUtils;
+import com.witchworks.common.core.WitchWorksCreativeTabs;
 import com.witchworks.common.entity.EntityBrew;
 import com.witchworks.common.lib.LibItemName;
 import net.minecraft.creativetab.CreativeTabs;
@@ -17,6 +18,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 import static com.witchworks.api.BrewRegistry.Brew.LINGER;
 
 /**
@@ -28,6 +31,7 @@ public class ItemBrewLinger extends ItemBrew {
 
 	public ItemBrewLinger() {
 		super(LibItemName.BREW_PHIAL_LINGER);
+		setCreativeTab(WitchWorksCreativeTabs.ITEMS_CREATIVE_TAB);
 	}
 
 	@Override
@@ -39,7 +43,7 @@ public class ItemBrewLinger extends ItemBrew {
 		if (!worldIn.isRemote) {
 			EntityBrew brew = new EntityBrew(worldIn, playerIn, copy, EntityBrew.BrewDispersion.LINGER);
 
-			brew.setHeadingFromThrower(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, -20.0F, 0.5F, 1.0F);
+			brew.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, -20.0F, 0.5F, 1.0F);
 			worldIn.spawnEntity(brew);
 		}
 
@@ -53,9 +57,11 @@ public class ItemBrewLinger extends ItemBrew {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-		BrewRegistry.getDefaults().get(LINGER).forEach((brew, brewEffect) ->
-				items.add(BrewUtils.createBrew(LINGER, brew))
-		);
+	public void getSubItems(CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
+		if (this.isInCreativeTab(tab)) {
+			BrewRegistry.getDefaults().get(LINGER).forEach((brew, brewEffect) ->
+					items.add(BrewUtils.createBrew(LINGER, brew))
+			);
+		}
 	}
 }

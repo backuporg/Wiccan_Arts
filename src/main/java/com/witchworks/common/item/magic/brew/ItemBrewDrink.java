@@ -3,6 +3,7 @@ package com.witchworks.common.item.magic.brew;
 import com.witchworks.api.BrewRegistry;
 import com.witchworks.api.brew.BrewEffect;
 import com.witchworks.api.brew.BrewUtils;
+import com.witchworks.common.core.WitchWorksCreativeTabs;
 import com.witchworks.common.core.capability.brew.BrewStorageHandler;
 import com.witchworks.common.lib.LibItemName;
 import net.minecraft.creativetab.CreativeTabs;
@@ -22,6 +23,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 import static com.witchworks.api.BrewRegistry.Brew.DRINK;
 
 /**
@@ -33,6 +36,7 @@ public class ItemBrewDrink extends ItemBrew {
 
 	public ItemBrewDrink() {
 		super(LibItemName.BREW_PHIAL_DRINK);
+		setCreativeTab(WitchWorksCreativeTabs.ITEMS_CREATIVE_TAB);
 	}
 
 	@Override
@@ -84,9 +88,11 @@ public class ItemBrewDrink extends ItemBrew {
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-		BrewRegistry.getDefaults().get(DRINK).forEach((brew, brewEffect) ->
-				items.add(BrewUtils.createBrew(DRINK, brew))
-		);
+	public void getSubItems(CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
+		if (this.isInCreativeTab(tab)) {
+			BrewRegistry.getDefaults().get(DRINK).forEach((brew, brewEffect) ->
+					items.add(BrewUtils.createBrew(DRINK, brew))
+			);
+		}
 	}
 }

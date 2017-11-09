@@ -24,6 +24,8 @@ public final class WitchWorksAPI {
 	//Sounds
 	public static final ResourceLocation BOIL = getLocation("boil");
 	public static final ResourceLocation BUZZ = getLocation("buzz");
+	public static final ResourceLocation BUBBLE = getLocation("bubble");
+	public static final ResourceLocation OVEN_OPEN = getLocation("oven_open");
 	public static final ResourceLocation CHALK_SCRIBBLE = getLocation("chalk_scribble");
 
 	public static ResourceLocation SHELL_ARMOR = getLocation("shell_armor");
@@ -59,6 +61,13 @@ public final class WitchWorksAPI {
 	public static ResourceLocation HELLS_WROTH = getLocation("hells_wroth");
 	public static ResourceLocation SETEHS_WASTES = getLocation("setehs_wastes");
 	public static ResourceLocation HELL_WORLD = getLocation("hell_world");
+	public static ResourceLocation ICE_WORLD = getLocation("ice_world");
+	public static ResourceLocation CORRUPTION = getLocation("corruption");
+	public static ResourceLocation SALT_LAND = getLocation("salt_land");
+	public static ResourceLocation ABSENCE = getLocation("absence");
+	public static ResourceLocation BULLETPROOF = getLocation("bulletproof");
+	public static ResourceLocation MORTAL_COIL = getLocation("mortal_coil");
+	public static ResourceLocation OVERCOAT = getLocation("overcoat");
 
 	private WitchWorksAPI() {
 	}

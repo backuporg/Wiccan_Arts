@@ -5,6 +5,7 @@ import com.witchworks.common.block.BlockMod;
 import com.witchworks.common.lib.LibBlockName;
 import com.witchworks.common.lib.LibGui;
 import com.witchworks.common.tile.TileOven;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -26,9 +27,10 @@ import static net.minecraft.block.BlockHorizontal.FACING;
  * It's distributed as part of Witchworks under
  * the MIT license.
  */
-public class BlockOven extends BlockMod {
+public class BlockOven extends BlockMod implements ITileEntityProvider {
 
 	//Todo: Add functionality.
+
 
 	public BlockOven() {
 		super(LibBlockName.OVEN, Material.IRON);
@@ -54,17 +56,26 @@ public class BlockOven extends BlockMod {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			final TileEntity tile = worldIn.getTileEntity(pos);
-			if (tile == null || !(tile instanceof TileOven)) return false;
+			final TileEntity tile1 = worldIn.getTileEntity(pos);
+			if (tile1 == null || !(tile1 instanceof TileOven)) return false;
 
 			ItemStack heldItem = playerIn.getHeldItem(hand);
 			if (!heldItem.isEmpty() && heldItem.getItem() == Items.NAME_TAG) {
-				((TileOven) tile).setCustomInventoryName(heldItem.getDisplayName());
+				((TileOven) tile1).setCustomInventoryName(heldItem.getDisplayName());
 			} else {
 				playerIn.openGui(WitchWorks.instance, LibGui.OVEN, worldIn, pos.getX(), pos.getY(), pos.getZ());
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+		final TileEntity tile1 = worldIn.getTileEntity(pos);
+		if (tile1 != null && tile1 instanceof TileOven) {
+			((TileOven) tile1).dropItems();
+		}
+		worldIn.removeTileEntity(pos);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -88,5 +99,10 @@ public class BlockOven extends BlockMod {
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
 		final EnumFacing enumfacing = EnumFacing.fromAngle(placer.rotationYaw);
 		return this.getDefaultState().withProperty(FACING, enumfacing);
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
+		return new TileOven();
 	}
 }

@@ -42,7 +42,7 @@ public class OzymandiasBrew extends BlockHitBrew {
 
 	@Override
 	public int getColor() {
-		return 0x16161D;
+		return 0x303E0C;
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class OzymandiasBrew extends BlockHitBrew {
 			Block block = world.getBlockState(spot).getBlock();
 			boolean place = amplifier > 2 || world.rand.nextBoolean();
 			if (place && stateMap.containsKey(block)) {
-				world.setBlockState(spot, stateMap.get(block), 11);
+				world.setBlockState(spot, stateMap.get(block), 3);
 			}
 		}
 	}

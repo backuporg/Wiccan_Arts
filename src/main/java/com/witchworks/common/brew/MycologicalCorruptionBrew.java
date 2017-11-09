@@ -1,7 +1,11 @@
 package com.witchworks.common.brew;
 
+import com.witchworks.api.brew.IBrew;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityMooshroom;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +20,7 @@ import java.util.Map;
  * It's distributed as part of Witchworks under
  * the MIT license.
  */
-public class MycologicalCorruptionBrew extends BlockHitBrew {
+public class MycologicalCorruptionBrew extends BlockHitBrew implements IBrew {
 
 	private final Map<Block, IBlockState> stateMap = new HashMap<>();
 
@@ -29,8 +33,18 @@ public class MycologicalCorruptionBrew extends BlockHitBrew {
 	}
 
 	@Override
+	public void apply(World world, BlockPos pos, EntityLivingBase entity, int amplifier, int tick) {
+		if (entity instanceof EntityCow & !(entity instanceof EntityMooshroom)) {
+			EntityMooshroom mooshroom = new EntityMooshroom(world);
+			mooshroom.setPosition(pos.getX(), pos.getY(), pos.getZ());
+			entity.setDead();
+			world.spawnEntity(mooshroom);
+		}
+	}
+
+	@Override
 	public int getColor() {
-		return 0xD8BFD8;
+		return 0xFF80DC;
 	}
 
 	@Override
@@ -50,7 +64,7 @@ public class MycologicalCorruptionBrew extends BlockHitBrew {
 			Block block = world.getBlockState(spot).getBlock();
 			boolean place = amplifier > 2 || world.rand.nextBoolean();
 			if (place && stateMap.containsKey(block)) {
-				world.setBlockState(spot, stateMap.get(block), 11);
+				world.setBlockState(spot, stateMap.get(block), 3);
 			}
 		}
 	}

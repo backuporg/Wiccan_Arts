@@ -3,7 +3,7 @@ package com.witchworks.common.item;
 import com.witchworks.api.CropRegistry;
 import com.witchworks.common.block.ModBlocks;
 import com.witchworks.common.block.natural.fluid.Fluids;
-import com.witchworks.common.crafting.VanillaCrafting;
+import com.witchworks.common.core.WitchWorksCreativeTabs;
 import com.witchworks.common.item.block.ItemBlockColor;
 import com.witchworks.common.item.block.ItemGemOre;
 import com.witchworks.common.item.equipment.ItemSilverArmor;
@@ -20,9 +20,12 @@ import com.witchworks.common.item.tool.*;
 import com.witchworks.common.lib.LibItemName;
 import com.witchworks.common.lib.LibMod;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.oredict.OreDictionary;
@@ -43,6 +46,7 @@ public final class ModItems {
 	//--------------------------------Items--------------------------------//
 	public static final Item gem = PLACE_HOLDER;
 	public static final Item gemstone_amalgam = PLACE_HOLDER;
+	public static final Item gem_powder = PLACE_HOLDER;
 
 	public static final Item mandrake_root = PLACE_HOLDER;
 	public static final Item seed_mandrake = PLACE_HOLDER;
@@ -91,6 +95,7 @@ public final class ModItems {
 	public static final Item empty_honeycomb = PLACE_HOLDER;
 	public static final Item unrefined_chalk = PLACE_HOLDER;
 	public static final Item needle_bone = PLACE_HOLDER;
+	public static final Item cold_iron_ingot = PLACE_HOLDER;
 	public static final Item silver_ingot = PLACE_HOLDER;
 	public static final Item silver_powder = PLACE_HOLDER;
 	public static final Item silver_nugget = PLACE_HOLDER;
@@ -110,6 +115,15 @@ public final class ModItems {
 	public static final Item envenomed_fang = PLACE_HOLDER;
 	public static final Item dimensional_sand = PLACE_HOLDER;
 	public static final Item chromatic_quill = PLACE_HOLDER;
+	public static final Item carnivorous_tooth = PLACE_HOLDER;
+	public static final Item catechu = PLACE_HOLDER;
+	public static final Item eye_of_ancient = PLACE_HOLDER;
+	public static final Item hoof = PLACE_HOLDER;
+	public static final Item equine_tail = PLACE_HOLDER;
+	public static final Item albedo = PLACE_HOLDER;
+	public static final Item absinthe_green = PLACE_HOLDER;
+	public static final Item oak_apple_gall = PLACE_HOLDER;
+	public static final Item iron_gall_ink = PLACE_HOLDER;
 
 	public static final Item silver_pickaxe = PLACE_HOLDER;
 	public static final Item silver_axe = PLACE_HOLDER;
@@ -132,6 +146,7 @@ public final class ModItems {
 		}
 		registry.register(new ItemGem());
 		registry.register(new ItemMod(LibItemName.GEMSTONE_AMALGAM));
+		registry.register(new ItemMod(LibItemName.COLD_IRON_INGOT));
 		registry.register(new ItemMod(LibItemName.SILVER_POWDER));
 		registry.register(new ItemMod(LibItemName.SILVER_INGOT));
 		registry.register(new ItemMod(LibItemName.SILVER_NUGGET));
@@ -143,6 +158,7 @@ public final class ModItems {
 				new ItemMod(LibItemName.BEE).setMaxDamage(35),
 				new ItemMod(LibItemName.HONEYCOMB),
 				new ItemMod(LibItemName.EMPTY_HONEYCOMB),
+				new ItemMod(LibItemName.GEM_POWDER),
 				new ItemMod(LibItemName.MORTAR_AND_PESTLE),
 				new ItemMod(LibItemName.UNREFINED_CHALK),
 				new ItemBrewDrink(),
@@ -164,6 +180,15 @@ public final class ModItems {
 				new ItemMod(LibItemName.ENVENOMED_FANG),
 				new ItemMod(LibItemName.DIMENSIONAL_SAND),
 				new ItemMod(LibItemName.CHROMATIC_QUILL),
+				new ItemMod(LibItemName.CARNIVOROUS_TOOTH),
+				new ItemMod(LibItemName.EYE_OF_ANCIENT),
+				new ItemMod(LibItemName.HOOF),
+				new ItemMod(LibItemName.EQUINE_TAIL),
+				new ItemMod(LibItemName.CATECHU),
+				new ItemMod(LibItemName.OAK_APPLE_GALL),
+				new ItemMod(LibItemName.IRON_GALL_INK),
+				new ItemMod(LibItemName.ABSINTHE_GREEN),
+				new ItemMod(LibItemName.ALBEDO),
 				new ItemHeart(),
 				new ItemShadowBook(),
 				new ItemDustyGrimoire()
@@ -199,8 +224,13 @@ public final class ModItems {
 				itemBlock(ModBlocks.crop_kenaf),
 				itemBlock(ModBlocks.crop_garlic),
 				itemBlock(ModBlocks.crop_wormwood),
+				itemBlock(ModBlocks.cypress_sapling),
+				itemBlock(ModBlocks.fake_ice),
+				itemBlock(ModBlocks.fake_ice_fence),
+				itemBlock(ModBlocks.fake_ice_stairs),
 
-				new ItemGemOre(ModBlocks.gem_ore),
+				new ItemGemOre(ModBlocks.gem_ore).setCreativeTab(WitchWorksCreativeTabs.BLOCKS_CREATIVE_TAB),
+				new ItemSlab(ModBlocks.fake_ice_slab_half, (BlockSlab) ModBlocks.fake_ice_slab_half, (BlockSlab) ModBlocks.fake_ice_slab_double).setRegistryName(ModBlocks.fake_ice_slab_half.getRegistryName()),
 				itemBlock(ModBlocks.silver_block),
 				itemBlock(ModBlocks.silver_ore),
 				itemBlock(ModBlocks.moldavite_block),
@@ -210,10 +240,17 @@ public final class ModItems {
 				itemBlock(ModBlocks.altar),
 				itemBlock(ModBlocks.oven),
 				itemBlock(ModBlocks.apiary),
+				itemBlock(ModBlocks.torchwood),
+				itemBlock(ModBlocks.ember_grass),
 				itemBlock(ModBlocks.beehive),
 				itemBlock(ModBlocks.tourmaline_block),
 				itemBlock(ModBlocks.malachite_block),
 				itemBlock(ModBlocks.tigers_eye_block),
+				itemBlock(ModBlocks.nuummite_block),
+				itemBlock(ModBlocks.alexandrite_block),
+				itemBlock(ModBlocks.garnet_block),
+				itemBlock(ModBlocks.jasper_block),
+				itemBlock(ModBlocks.amethyst_block),
 				itemBlock(ModBlocks.salt_ore),
 				itemBlock(ModBlocks.nethersteel),
 				itemBlock(ModBlocks.salt_barrier),
@@ -226,7 +263,6 @@ public final class ModItems {
 	}
 
 	public static void init() {
-		VanillaCrafting.items();
 		initOreDictionary();
 	}
 
@@ -285,5 +321,25 @@ public final class ModItems {
 		OreDictionary.registerOre("listAllspice", new ItemStack(ModItems.wormwood));
 		OreDictionary.registerOre("cropWormwood", new ItemStack(ModItems.wormwood));
 		OreDictionary.registerOre("feather", new ItemStack(ModItems.chromatic_quill));
+		OreDictionary.registerOre("dyeBrown", new ItemStack(ModItems.catechu));
+		OreDictionary.registerOre("dyeWhite", new ItemStack(ModItems.albedo));
+		OreDictionary.registerOre("dyeBlack", new ItemStack(ModItems.iron_gall_ink));
+		OreDictionary.registerOre("dyeGreen", new ItemStack(ModItems.absinthe_green));
+		OreDictionary.registerOre("blockWoolWHITE", new ItemStack(Blocks.WOOL, 1, 0));
+		OreDictionary.registerOre("blockWoolORANGE", new ItemStack(Blocks.WOOL, 1, 1));
+		OreDictionary.registerOre("blockWoolMAGENTA", new ItemStack(Blocks.WOOL, 1, 2));
+		OreDictionary.registerOre("blockWoolLIGHT_BLUE", new ItemStack(Blocks.WOOL, 1, 3));
+		OreDictionary.registerOre("blockWoolYELLOW", new ItemStack(Blocks.WOOL, 1, 4));
+		OreDictionary.registerOre("blockWoolLIME", new ItemStack(Blocks.WOOL, 1, 5));
+		OreDictionary.registerOre("blockWoolPINK", new ItemStack(Blocks.WOOL, 1, 6));
+		OreDictionary.registerOre("blockWoolGRAY", new ItemStack(Blocks.WOOL, 1, 7));
+		OreDictionary.registerOre("blockWoolSILVER", new ItemStack(Blocks.WOOL, 1, 8));
+		OreDictionary.registerOre("blockWoolCYAN", new ItemStack(Blocks.WOOL, 1, 9));
+		OreDictionary.registerOre("blockWoolPURPLE", new ItemStack(Blocks.WOOL, 1, 10));
+		OreDictionary.registerOre("blockWoolBLUE", new ItemStack(Blocks.WOOL, 1, 11));
+		OreDictionary.registerOre("blockWoolBROWN", new ItemStack(Blocks.WOOL, 1, 12));
+		OreDictionary.registerOre("blockWoolGREEN", new ItemStack(Blocks.WOOL, 1, 13));
+		OreDictionary.registerOre("blockWoolRED", new ItemStack(Blocks.WOOL, 1, 14));
+		OreDictionary.registerOre("blockWoolBLACK", new ItemStack(Blocks.WOOL, 1, 15));
 	}
 }

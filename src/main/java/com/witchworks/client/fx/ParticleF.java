@@ -10,15 +10,13 @@ package com.witchworks.client.fx;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
 public enum ParticleF {
 	CAULDRON_BUBBLE(new ParticleBubble.Factory()),
 	STEAM(new ParticleSteam.Factory()),
 	BEE(new ParticleBee.Factory()),
-	SPARK(new ParticleSpark.Factory());
+	SPARK(new ParticleSpark.Factory()),
+	FLAME(new ParticleOvenFlame.Factory());
 
 	private final IParticleF factory;
 

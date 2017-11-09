@@ -11,57 +11,56 @@ import net.minecraft.item.ItemStack;
 public class ItemCandleColorHandler implements IItemColor {
 
 	@Override
-	public int getColorFromItemstack(ItemStack stack, int tintIndex) {
+	public int colorMultiplier(ItemStack stack, int tintIndex) {
 		int color = 0;
 		switch (stack.getMetadata()) {
 			case 0:
-				color = 15987957;
+				color = 16383998;
 				break;
 			case 1:
-				color = 16087062;
+				color = 16351261;
 				break;
 			case 2:
-				color = 11745961;
+				color = 13061821;
 				break;
 			case 3:
 				color = 3847130;
 				break;
 			case 4:
-				color = 16435754;
+				color = 16701501;
 				break;
 			case 5:
-				color = 8834086;
+				color = 8439583;
 				break;
 			case 6:
-				color = 16030389;
+				color = 15961002;
 				break;
 			case 7:
 				color = 4673362;
 				break;
 			case 8:
-				color = 9737358;
+				color = 10329495;
 				break;
 			case 9:
-				color = 1413268;
+				color = 1481884;
 				break;
 			case 10:
-				color = 8400048;
+				color = 8991416;
 				break;
 			case 11:
-				color = 2895503;
+				color = 3949738;
 				break;
 			case 12:
 				color = 8606770;
 				break;
 			case 13:
-				color = 6653465;
+				color = 6192150;
 				break;
 			case 14:
-				color = 10955043;
+				color = 11546150;
 				break;
 			case 15:
-				color = 1184535;
-				break;
+				color = 1908001;
 			default:
 				break;
 		}

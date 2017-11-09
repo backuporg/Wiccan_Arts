@@ -21,15 +21,33 @@ public class HellWorldBrew extends BlockHitBrew {
 
 	private final Map<Block, IBlockState> stateMap = new HashMap<>();
 
+	@SuppressWarnings("deprecation")
 	public HellWorldBrew() {
 		stateMap.put(Blocks.GRASS_PATH, Blocks.RED_NETHER_BRICK.getDefaultState());
 		stateMap.put(Blocks.GRAVEL, Blocks.SOUL_SAND.getDefaultState());
 		stateMap.put(Blocks.COBBLESTONE, Blocks.NETHERRACK.getDefaultState());
 		stateMap.put(Blocks.PLANKS, Blocks.NETHER_BRICK.getDefaultState());
 		stateMap.put(Blocks.OAK_STAIRS, Blocks.NETHER_BRICK_STAIRS.getDefaultState());
-		stateMap.put(Blocks.LOG, ModBlocks.nethersteel.getDefaultState());
+		stateMap.put(Blocks.DARK_OAK_STAIRS, Blocks.NETHER_BRICK_STAIRS.getDefaultState());
+		stateMap.put(Blocks.JUNGLE_STAIRS, Blocks.NETHER_BRICK_STAIRS.getDefaultState());
+		stateMap.put(Blocks.ACACIA_STAIRS, Blocks.NETHER_BRICK_STAIRS.getDefaultState());
+		stateMap.put(Blocks.BIRCH_STAIRS, Blocks.NETHER_BRICK_STAIRS.getDefaultState());
+		stateMap.put(Blocks.SPRUCE_STAIRS, Blocks.NETHER_BRICK_STAIRS.getDefaultState());
 		stateMap.put(Blocks.STONE_STAIRS, Blocks.NETHER_BRICK_STAIRS.getDefaultState());
 		stateMap.put(Blocks.OAK_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
+		stateMap.put(Blocks.SPRUCE_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
+		stateMap.put(Blocks.ACACIA_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
+		stateMap.put(Blocks.JUNGLE_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
+		stateMap.put(Blocks.BIRCH_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
+		stateMap.put(Blocks.DARK_OAK_FENCE, Blocks.NETHER_BRICK_FENCE.getDefaultState());
+		stateMap.put(Blocks.SPRUCE_STAIRS, Blocks.NETHER_BRICK_STAIRS.getDefaultState());
+		stateMap.put(Blocks.ACACIA_STAIRS, Blocks.NETHER_BRICK_STAIRS.getDefaultState());
+		stateMap.put(Blocks.JUNGLE_STAIRS, Blocks.NETHER_BRICK_STAIRS.getDefaultState());
+		stateMap.put(Blocks.DARK_OAK_STAIRS, Blocks.NETHER_BRICK_STAIRS.getDefaultState());
+		stateMap.put(Blocks.END_BRICKS, Blocks.NETHER_BRICK.getDefaultState());
+		stateMap.put(Blocks.BRICK_BLOCK, Blocks.NETHER_BRICK.getDefaultState());
+		stateMap.put(Blocks.STONEBRICK, Blocks.NETHER_BRICK.getDefaultState());
+		stateMap.put(Blocks.WOOL, Blocks.WOOL.getStateFromMeta(14));
 	}
 
 	@Override
@@ -52,9 +70,14 @@ public class HellWorldBrew extends BlockHitBrew {
 		Iterable<BlockPos> spots = BlockPos.getAllInBox(posI, posF);
 		for (BlockPos spot : spots) {
 			Block block = world.getBlockState(spot).getBlock();
+			IBlockState state = world.getBlockState(spot);
 			boolean place = amplifier > 2 || world.rand.nextBoolean();
 			if (place && stateMap.containsKey(block)) {
-				world.setBlockState(spot, stateMap.get(block), 11);
+				world.setBlockState(spot, stateMap.get(block), 3);
+			} else if (state.getBlock() == Blocks.LOG) {
+				world.setBlockState(spot, ModBlocks.nethersteel.getDefaultState(), 3);
+			} else if (state.getBlock() == Blocks.LOG2) {
+				world.setBlockState(spot, ModBlocks.nethersteel.getDefaultState(), 3);
 			}
 		}
 	}

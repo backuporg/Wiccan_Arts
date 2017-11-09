@@ -1,8 +1,11 @@
 package com.witchworks.common.core.net;
 
 import com.witchworks.client.gui.GuiApiary;
+import com.witchworks.client.gui.GuiOven;
 import com.witchworks.client.gui.container.ContainerApiary;
+import com.witchworks.client.gui.container.ContainerOven;
 import com.witchworks.common.tile.TileApiary;
+import com.witchworks.common.tile.TileOven;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -24,6 +27,9 @@ public class GuiHandler implements IGuiHandler {
 			case 0:
 				final TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
 				return tile != null && (tile instanceof TileApiary) ? new ContainerApiary(player.inventory, (TileApiary) tile) : null;
+			case 1:
+				final TileEntity tile1 = world.getTileEntity(new BlockPos(x, y, z));
+				return tile1 != null && (tile1 instanceof TileOven) ? new ContainerOven(player.inventory, (TileOven) tile1) : null;
 			default:
 				return null;
 		}
@@ -36,6 +42,9 @@ public class GuiHandler implements IGuiHandler {
 			case 0:
 				final TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
 				return tile != null && (tile instanceof TileApiary) ? new GuiApiary(player.inventory, (TileApiary) tile) : null;
+			case 1:
+				final TileEntity tile1 = world.getTileEntity(new BlockPos(x, y, z));
+				return tile1 != null && (tile1 instanceof TileOven) ? new GuiOven(player.inventory, (TileOven) tile1) : null;
 			default:
 				return null;
 		}

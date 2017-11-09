@@ -32,6 +32,7 @@ public final class LibBlockName {
 	public static final String CROP_THISTLE = "crop_thistle";
 
 	public static final String GEM_ORE = "gem_ore";
+	public static final String CYPRESS_SAPLING = "cypress_sapling";
 	public static final String SILVER_ORE = "silver_ore";
 	public static final String SILVER_BLOCK = "silver_block";
 	public static final String MOLDAVITE_BLOCK = "moldavite_block";
@@ -49,9 +50,22 @@ public final class LibBlockName {
 	public static final String TOURMALINE_BLOCK = "tourmaline_block";
 	public static final String MALACHITE_BLOCK = "malachite_block";
 	public static final String TIGERS_EYE_BLOCK = "tigers_eye_block";
+	public static final String NUUMMITE_BLOCK = "nuummite_block";
+	public static final String ALEXANDRITE_BLOCK = "alexandrite_block";
+	public static final String AMETHYST_BLOCK = "amethyst_block";
+	public static final String JASPER_BLOCK = "jasper_block";
+	public static final String GARNET_BLOCK = "garnet_block";
 	public static final String NETHERSTEEL = "nethersteel";
 	public static final String CHALK = "chalk";
 	public static final String SALT_BARRIER = "salt_barrier";
+	public static final String FAKE_ICE = "fake_ice";
+	public static final String FAKE_ICE_FENCE = "fake_ice_fence";
+	public static final String FAKE_ICE_STAIRS = "fake_ice_stairs";
+	public static final String TORCHWOOD = "torchwood";
+	public static final String EMBER_GRASS = "ember_grass";
+	public static final String FAKE_ICE_SLAB = "fake_ice_slab";
+	public static final String FAKE_ICE_SLAB_DOUBLE = "fake_ice_slab_double";
+	public static final String FAKE_ICE_SLAB_HALF = "fake_ice_slab_half";
 
 	private LibBlockName() {
 	}

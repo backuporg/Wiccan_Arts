@@ -21,7 +21,10 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import static com.witchworks.common.lib.LibMod.MOD_NAME;
 import static net.minecraftforge.fml.common.Mod.EventHandler;
 import static net.minecraftforge.fml.common.Mod.Instance;
 
@@ -31,9 +34,10 @@ import static net.minecraftforge.fml.common.Mod.Instance;
  * the MIT license.
  */
 @SuppressWarnings("WeakerAccess")
-@Mod(modid = LibMod.MOD_ID, name = LibMod.MOD_NAME, version = LibMod.MOD_VER, dependencies = LibMod.DEPENDENCIES, acceptedMinecraftVersions = "[1.12]")
+@Mod(modid = LibMod.MOD_ID, name = MOD_NAME, version = LibMod.MOD_VER, dependencies = LibMod.DEPENDENCIES, acceptedMinecraftVersions = "[1.12,1.13]", certificateFingerprint = "@FINGERPRINT@")
 public class WitchWorks {
 
+	public static final Logger logger = LogManager.getLogger(MOD_NAME);
 	@SidedProxy(serverSide = LibMod.PROXY_COMMON, clientSide = LibMod.PROXY_CLIENT)
 	public static ISidedProxy proxy;
 	@Instance(LibMod.MOD_ID)
@@ -52,6 +56,9 @@ public class WitchWorks {
 		ModEntities.init();
 		ModBrews.init();
 		proxy.preInit(event);
+
+		logger.info("Remember when I told you how my");
+		logger.info("Kin is different in some ways?");
 	}
 
 	@EventHandler
@@ -64,6 +71,14 @@ public class WitchWorks {
 
 		SeedDropRegistry.init();
 		ModGen.init();
+
+		logger.info("It's a fact, she is exactly that!");
+		logger.info("A harbinger of death from the world of witchcraft,");
+		logger.info("And she's feeding them cakes and her ale to this innocent boy,");
+		logger.info("And her magic brings dismay!");
+
+		logger.info("I hear her in the wind, the bane of our town");
+		logger.info("Come with me, father, I'm to expose a heathen");
 	}
 
 	@EventHandler

@@ -2,6 +2,9 @@ package com.witchworks.common.brew;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityMooshroom;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -29,6 +32,16 @@ public class GrassGrowBrew extends BlockHitBrew {
 	}
 
 	@Override
+	public void apply(World world, BlockPos pos, EntityLivingBase entity, int amplifier, int tick) {
+		if (entity instanceof EntityMooshroom) {
+			EntityCow cow = new EntityCow(world);
+			cow.setPosition(pos.getX(), pos.getY(), pos.getZ());
+			entity.setDead();
+			world.spawnEntity(cow);
+		}
+	}
+
+	@Override
 	public int getColor() {
 		return 0x4CBB17;
 	}
@@ -50,7 +63,7 @@ public class GrassGrowBrew extends BlockHitBrew {
 			Block block = world.getBlockState(spot).getBlock();
 			boolean place = amplifier > 2 || world.rand.nextBoolean();
 			if (place && stateMap.containsKey(block)) {
-				world.setBlockState(spot, stateMap.get(block), 11);
+				world.setBlockState(spot, stateMap.get(block), 3);
 			}
 		}
 	}

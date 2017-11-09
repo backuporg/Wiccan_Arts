@@ -13,6 +13,10 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 
+import javax.annotation.Nonnull;
+
+import static com.witchworks.common.core.WitchWorksCreativeTabs.BLOCKS_CREATIVE_TAB;
+
 /**
  * This class was created by <Arekkuusu> on 27/06/2017.
  * It's distributed as part of Solar Epiphany under
@@ -25,6 +29,7 @@ public class BlockGemOre extends BlockMod {
 	public BlockGemOre() {
 		super(LibBlockName.GEM_ORE, Material.ROCK);
 		setHardness(2.0F);
+		setCreativeTab(BLOCKS_CREATIVE_TAB);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -49,17 +54,12 @@ public class BlockGemOre extends BlockMod {
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
-		items.add(new ItemStack(this));
-		items.add(new ItemStack(this, 1, 1));
-		items.add(new ItemStack(this, 1, 2));
-		items.add(new ItemStack(this, 1, 3));
-		items.add(new ItemStack(this, 1, 4));
-		items.add(new ItemStack(this, 1, 5));
-		items.add(new ItemStack(this, 1, 6));
-		items.add(new ItemStack(this, 1, 7));
-		items.add(new ItemStack(this, 1, 8));
-		items.add(new ItemStack(this, 1, 9));
+	public void getSubBlocks(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
+		{
+			for (int i = 0; i < Gem.values().length; ++i) {
+				items.add(new ItemStack(this, 1, i));
+			}
+		}
 	}
 
 	@Override

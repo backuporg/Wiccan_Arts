@@ -78,8 +78,13 @@ item.heart.name=Heart
 item.envenomed_fang.name=Envenomed Fang
 item.dimensional_sand.name=Dimensional Sand
 item.chromatic_quill.name=Chromatic Quill
+item.carnivorous_tooth.name=Carnivorous Tooth
+item.eye_of_ancient.name=Eye of Ancient
+item.hoof.name=Hoof
+item.equine_tail.name=Equine's Tail
 item.bee.name=Bee
 item.salt.name=Salt
+item.cold_iron_ingot.name=Cold Iron Ingot
 item.silver_ingot.name=Silver Ingot
 item.silver_nugget.name=Silver Nugget
 item.silver_powder.name=Silver Powder
@@ -102,6 +107,15 @@ item.wand.name=Wand
 item.needle_bone.name=Bone Needle
 item.unrefined_chalk.name=Unrefined Chalk
 item.brew_phial_drink.name=Brew Phial
+item.brew_phial_splash.name=Splash Brew Phial
+item.brew_phial_drink_lingering.name=Lingering Brew Phial
+item.oak_apple_gall.name=Oak Apple Gall
+
+//Dyes
+item.catechu.name=Catechu Brown
+item.absinthe_green.name=Absinthe Green
+item.albedo.name=Alchemical White
+item.iron_gall_ink.name=Iron Gall Ink
 
 //Blocks
 tile.candle_small.white.name=Small White Candle
@@ -162,7 +176,7 @@ tile.crop_ginger.name=Ginger Crop
 tile.crop_kelp.name=Kelp Crop
 tile.crop_mint.name=Mint Crop
 tile.crop_white_sage.name=White Sage Crop
-tile.crop_mandrake.name=Mandrake Crop
+tile.crop_mandrake_root.name=Mandrake Crop
 tile.crop_lavender.name=Lavender Crop
 tile.crop_thistle.name=Thistle Crop
 tile.crop_silphium.name=Silphium Crop
@@ -182,6 +196,11 @@ tile.moldavite_block.name=Moldavite Block
 tile.bloodstone_block.name=Bloodstone Block
 tile.tigers_eye_block.name=Tiger's Eye Block
 tile.malachite_block.name=Malachite Block
+tile.nuummite_block.name=Nuummite Block
+tile.garnet_block.name=Garnet Block
+tile.alexandrite_block.name=Alexandrite Block
+tile.jasper_block.name=Jasper Block
+tile.amethyst_block.name=Amethyst Block
 tile.silver_block.name=Silver Block
 tile.nethersteel.name=Nethersteel
 tile.gem_ore_jasper.name=Jasper Ore
@@ -195,9 +214,20 @@ tile.gem_ore_alexandrite.name=Alexandrite Ore
 tile.coquina.name=Coquina
 tile.chalk.name=Raw Chalk
 tile.unrefined_chalk.name=Unrefined Chalk
+tile.fake_ice.name=Perpetual Ice
+tile.fake_ice_fence.name=Perpetual Ice Fence
+tile.fake_ice_stairs.name=Perpetual Ice Stairs
+tile.fake_ice_slab_half.name=Perpetual Ice Slab
+
+//Saplings
+tile.cypress_sapling.name=Cypress Sapling
+
+//Mutant Plants
+tile.torchwood.name=Torchwood
+tile.ember_grass.name=Ember Grass
 
 //Devices
-tile.cauldron.name=Cauldron
+tile.cauldron.name=Witches Cauldron
 tile.apiary.name=Apiary
 tile.beehive.name=Beehive
 tile.altar.name=Altar
@@ -211,11 +241,11 @@ fluid.for.honey=Honey
 brew.instant=Instant
 
 brew.shell_armor.name=Shell Armor Brew
-brew.shell_armor.desc=The edges of your shell may hurt those who attack you
+brew.shell_armor.desc=The edges of your shell may hurt those who attack you.
 brew.shell_armor.tooltip=Shell Armor
 
 brew.spider_nightmare.name=Spider Nightmare Brew
-brew.spider_nightmare.desc=Surround your enemy with webs and spiders
+brew.spider_nightmare.desc=Surround your enemy with webs and spiders.
 brew.spider_nightmare.tooltip=Spider Nightmare
 
 brew.frostbite.name=Frostbite Brew
@@ -223,75 +253,75 @@ brew.frostbite.desc=Encases a target in ice. May have other effects.
 brew.frostbite.tooltip=Frostbite
 
 brew.extinguish_fires.name=Extinguish Fires Brew
-brew.extinguish_fires.desc=Puts out any fires on you
+brew.extinguish_fires.desc=Puts out any fires on you.
 brew.extinguish_fires.tooltip=Extinguish Fires
 
 brew.mars_water.name=Water of Mars Brew
-brew.mars_water.desc=Inflicts nasty debuffs on the target
+brew.mars_water.desc=Inflicts nasty debuffs on the target.
 brew.mars_water.tooltip=Mars water
 
 brew.holy_water.name=Holy Water
-brew.holy_water.desc=Damages undead and demons, but has no effect on the living
+brew.holy_water.desc=Damages undead and demons, but has no effect on the living.
 brew.holy_water.tooltip=Holy Water
 
 brew.volatility.name=Brew of Volatility
-brew.volatility.desc=Makes you explode upon being hit
+brew.volatility.desc=Makes you explode upon being hit.
 brew.volatility.tooltip=Volatility
 
 brew.till_land.name=Tilled Land Brew
-brew.till_land.desc=Turns dirt into farmland
+brew.till_land.desc=Turns dirt into farmland when thrown.
 brew.till_land.tooltip=Tilled Land
 
 brew.fertilize.name=Fertilize Brew
-brew.fertilize.desc=Makes stuff grow
+brew.fertilize.desc=Makes stuff grow when thrown.
 brew.fertilize.tooltip=Fertilize
 
 brew.harvest.name=Harvest Festival Brew
-brew.harvest.desc=Harvests crops
+brew.harvest.desc=Harvests crops when thrown.
 brew.harvest.tooltip=Harvest Festival
 
 brew.grow_flowers.name=Flower Apparition Brew
-brew.grow_flowers.desc=Makes flowers appear
+brew.grow_flowers.desc=Makes flowers when thrown.
 brew.grow_flowers.tooltip=Flower Apparition
 
 brew.ender_inhibition.name=Ender Inhibition Brew
-brew.ender_inhibition.desc=Ender beings can't teleport
+brew.ender_inhibition.desc=Ender beings can't teleport.
 brew.ender_inhibition.tooltip=Ender Inhibition
 
 brew.path_of_the_deep.name=Path of the Deep Brew
-brew.path_of_the_deep.desc=Swim faster
+brew.path_of_the_deep.desc=Allows you to swim faster.
 brew.path_of_the_deep.tooltip=Path of the Deep
 
 brew.rock_pulverize.name=Rock Pulverize Brew
-brew.rock_pulverize.desc=Turns rock into gravel, gravel into sand
+brew.rock_pulverize.desc=Turns rock into gravel, and gravel into sand.
 brew.rock_pulverize.tooltip=Rock Pulverize
 
 brew.prune_leaves.name=Prune Leaves Brew
-brew.prune_leaves.desc=Removes leaves
+brew.prune_leaves.desc=Removes leaves.
 brew.prune_leaves.tooltip=Prune Leaves
 
 brew.auto_plant.name=Auto Plant Brew
-brew.auto_plant.desc=Plants any seed that is on the ground
+brew.auto_plant.desc=Plants any seed that is on the ground.
 brew.auto_plant.tooltip=Auto Plant
 
 brew.snow_trail.name=Snow Trail Brew
-brew.snow_trail.desc=Snow Layer everywhere and affected creatures leave trail of snow
+brew.snow_trail.desc=Places a snow layer as an affected mob or player walks.
 brew.snow_trail.tooltip=Snow Trail
 
 brew.skin_tint.name=Skin Tint Brew
-brew.skin_tint.desc=Tints your skin with a specific color
+brew.skin_tint.desc=Tints your skin with a specific color.
 brew.skin_tint.tooltip=Skin Tint
 
 brew.wolfsbane.name=Wolfsbane Brew
-brew.wolfsbane.desc=Deals damage to wolves and therians
+brew.wolfsbane.desc=Deals damage to wolves and therians.
 brew.wolfsbane.tooltip=Wolfsbane
 
 brew.sinking.name=Brew of Sinking
-brew.sinking.desc=Causes you to sink and be unable to jump
+brew.sinking.desc=Causes you to sink and be unable to jump.
 brew.sinking.tooltip=Sinking
 
 brew.cursed_leaping.name=Brew of Cursed Leaping
-brew.cursed_leaping.desc=Don't jump
+brew.cursed_leaping.desc=Causes a target to jump uncontrollably.
 brew.cursed_leaping.tooltip=Cursed Leaping
 
 brew.bane_arthropods.name=Bane of Arthropods Brew
@@ -307,23 +337,23 @@ brew.ignition.desc=Lights you or a target on fire.
 brew.ignition.tooltip=Ignition
 
 brew.grace.name=Brew of Grace
-brew.grace.desc=Negates fall damage
+brew.grace.desc=Negates fall damage.
 brew.grace.tooltip=Grace
 
 brew.purify.name=Brew of Purification
-brew.purify.desc=Removes harmful brew effects
+brew.purify.desc=Removes harmful brew effects.
 brew.purify.tooltip=Purity
 
 brew.notched.name=Notched Brew
-brew.notched.desc=Adds all of the effects a notch apple applies
+brew.notched.desc=Adds all of the effects a notch apple applies.
 brew.notched.tooltip=Notched
 
 brew.mycological_corruption.name=Brew of Mycological Corruption
-brew.mycological_corruption.desc=Turns grass and dirt into mycelium
+brew.mycological_corruption.desc=Turns grass and dirt into mycelium. May have other effects.
 brew.mycological_corruption.tooltip=Mycological Corruption
 
 brew.growth.name=Brew of Growth
-brew.growth.desc=Turns mycelium and dirt into grass
+brew.growth.desc=Turns mycelium and dirt into grass. May have other effects.
 brew.growth.tooltip=Growth
 
 brew.ozymandias.name=Ozymandias' Brew
@@ -341,6 +371,34 @@ brew.setehs_wastes.tooltip=Seteh's Wastes
 brew.hell_world.name=Brew of Fire World
 brew.hell_world.desc=Converts your surroundings to a hellish scene.
 brew.hell_world.tooltip=Fire World
+
+brew.ice_world.name=Brew of Ice World
+brew.ice_world.desc=Converts your surroundings to a wintery wonderland.
+brew.ice_world.tooltip=Ice World
+
+brew.corruption.name=Brew of Corruption
+brew.corruption.desc=Removes all beneficial brew effects.
+brew.corruption.tooltip=Corruption
+
+brew.salt_land.name=Brew of Salting
+brew.salt_land.desc=Destroys farmland and renders it useless.
+brew.salt_land.tooltip=Salting
+
+brew.absence.name=Absence Brew
+brew.absence.desc=Removes all brew effects from a player.
+brew.absence.tooltip=Absence
+
+brew.bulletproof.name=Bulletproof Brew
+brew.bulletproof.desc=Negates damage from projectiles.
+brew.bulletproof.tooltip=Bulletproof
+
+brew.overcoat.name=Overcoat Brew
+brew.overcoat.desc=Negates most damage.
+brew.overcoat.tooltip=Overcoat
+
+brew.mortal_coil.name=Mortal Coil Brew
+brew.mortal_coil.desc=Kills you at the end of the timer.
+brew.mortal_coil.tooltip=Mortal Coil
 
 brew..name=
 brew..desc=
@@ -370,11 +428,11 @@ witch.tooltip.seed_tulsi_description.name=Seed from a small herb
 
 witch.tooltip.aconitum_description.name=Poisonous, can prevent or revert shapeshifting, and wolves and therians have an aversion to it
 witch.tooltip.asphodel_description.name=Related to death and the afterlife, but not poisonous
-witch.tooltip.belladonna_description.name=Highly toxic, can be used as a hallucinogenic, thought to be used as part of a flying ointment
+witch.tooltip.belladonna_description.name=A highly toxic plant, this is a prime component of flying ointment
 witch.tooltip.ginger_description.name=Meant to give energy and increased speed
 witch.tooltip.kelp_description.name=Related to water and protection overseas
 witch.tooltip.mint_description.name=Used for protection against magic
-witch.tooltip.white_sage_description.name=Is used as an aid in exorcisms or cleaning an area and to increase wisdom
+witch.tooltip.white_sage_description.name=Used as an aid in exorcisms
 witch.tooltip.mandrake_root_description.name=Used to amplify magical effects
 witch.tooltip.lavender_description.name=Associated with purity and grace
 witch.tooltip.thistle_description.name=A flower associated with strength and durability, and is the national flower of Scotland
@@ -405,9 +463,9 @@ item.book_of_shadows.name=Book of Shadows
 item.dusty_grimoire.name=Dusty Grimoire
 
 //Incantation
-commands.incantation.notFound=The powers you cast forth fizzle to nothingness
+commands.incantation.notFound=The powers you cast forth fizzle into nothingness
 
-//Achievements
+//Advancements
 achievement.witchworks:craftMalachite=Let's Be Malachite Again!
 achievement.witchworks:craftMalachite.desc=This Is Between Us!
 

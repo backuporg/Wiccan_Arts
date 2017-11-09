@@ -18,6 +18,8 @@ import static net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 @ObjectHolder(LibMod.MOD_ID)
 public final class ModBrews {
 
+	//Todo: Brew that removes armor.
+
 	public static IBrew SHELL_ARMOR;
 	public static IBrew SPIDER_NIGHTMARE;
 	public static IBrew EXTINGUISH_FIRES;
@@ -51,6 +53,13 @@ public final class ModBrews {
 	public static IBrew HELLS_WROTH;
 	public static IBrew SETEHS_WASTES;
 	public static IBrew HELL_WORLD;
+	public static IBrew ICE_WORLD;
+	public static IBrew CORRUPTION;
+	public static IBrew SALT_LAND;
+	public static IBrew ABSENCE;
+	public static IBrew BULLETPROOF;
+	public static IBrew MORTAL_COIL;
+	public static IBrew OVERCOAT;
 
 	private ModBrews() {
 	}
@@ -89,6 +98,13 @@ public final class ModBrews {
 		HELLS_WROTH = registerBrew(new HellsWrothBrew());
 		SETEHS_WASTES = registerBrew(new SetehsWastesBrew());
 		HELL_WORLD = registerBrew(new HellWorldBrew());
+		ICE_WORLD = registerBrew(new IceWorldBrew());
+		CORRUPTION = registerBrew(new CorruptionBrew());
+		SALT_LAND = registerBrew(new SaltLandBrew());
+		ABSENCE = registerBrew(new AbsenceBrew());
+		BULLETPROOF = registerBrew(new BulletProofBrew());
+		MORTAL_COIL = registerBrew(new MortalCoilBrew());
+		OVERCOAT = registerBrew(new OvercoatBrew());
 
 		//--------------------------------DRINKS--------------------------------//
 		addDrink(SHELL_ARMOR, 2500, 0);
@@ -100,6 +116,10 @@ public final class ModBrews {
 		addDrink(GRACE, 200, 0);
 		addDrink(PURIFY, 1, 0);
 		addDrink(NOTCHED, 1, 0);
+		addDrink(CORRUPTION, 1, 0);
+		addDrink(ABSENCE, 1, 0);
+		addDrink(BULLETPROOF, 2500, 0);
+		addDrink(OVERCOAT, 2500, 0);
 
 		//--------------------------------SPLASH--------------------------------//
 		addSplash(SPIDER_NIGHTMARE, 500, 0);
@@ -133,6 +153,11 @@ public final class ModBrews {
 		addSplash(HELLS_WROTH, 500, 0);
 		addSplash(SETEHS_WASTES, 0, 0);
 		addSplash(HELL_WORLD, 0, 0);
+		addSplash(ICE_WORLD, 0, 0);
+		addSplash(CORRUPTION, 1, 0);
+		addSplash(SALT_LAND, 0, 0);
+		addSplash(ABSENCE, 1, 0);
+		addSplash(MORTAL_COIL, 2500, 0);
 
 		//--------------------------------LINGER--------------------------------//
 		addLinger(SPIDER_NIGHTMARE, 1000, 0);
@@ -148,6 +173,8 @@ public final class ModBrews {
 		addLinger(IGNITION, 750, 0);
 		addLinger(OUTCASTS_SHAME, 50, 0);
 		addLinger(PURIFY, 50, 0);
+		addLinger(CORRUPTION, 50, 0);
+		addLinger(ABSENCE, 50, 0);
 	}
 
 	private static IBrew registerBrew(IBrew brew) {

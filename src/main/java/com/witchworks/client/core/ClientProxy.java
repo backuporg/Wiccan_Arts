@@ -19,7 +19,6 @@ import com.witchworks.common.core.proxy.ISidedProxy;
 import com.witchworks.common.entity.EntityBrew;
 import com.witchworks.common.entity.EntityBrewLinger;
 import com.witchworks.common.item.ModItems;
-import com.witchworks.common.lib.LibMod;
 import com.witchworks.common.tile.TileCauldron;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.BlockColors;
@@ -38,15 +37,13 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * This class was created by <Arekkuusu> on 26/02/2017.
  * It's distributed as part of Witchworks under
  * the MIT license.
  */
-@SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber(modid = LibMod.MOD_ID)
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientProxy implements ISidedProxy {
 
 	@SubscribeEvent

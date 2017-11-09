@@ -1,12 +1,15 @@
 package com.witchworks.common.block;
 
-import com.witchworks.common.block.magic.BlockSaltBarrier;
+import com.witchworks.common.block.magic.*;
+import com.witchworks.common.block.magic.plants.BlockEmberGrass;
+import com.witchworks.common.block.magic.plants.BlockTorchwood;
 import com.witchworks.common.block.natural.BlockBeehive;
 import com.witchworks.common.block.natural.BlockGemOre;
 import com.witchworks.common.block.natural.BlockSaltOre;
 import com.witchworks.common.block.natural.BlockSilverOre;
 import com.witchworks.common.block.natural.crop.*;
 import com.witchworks.common.block.natural.fluid.Fluids;
+import com.witchworks.common.block.natural.tree.BlockCypressSapling;
 import com.witchworks.common.block.tools.*;
 import com.witchworks.common.crafting.VanillaCrafting;
 import com.witchworks.common.lib.LibBlockName;
@@ -46,7 +49,7 @@ public final class ModBlocks {
 	public static final BlockCrop crop_silphium = null;
 	public static final BlockCrop crop_garlic = null;
 	public static final BlockCrop crop_wormwood = null;
-	private static final Block PLACE_HOLDER = new Block(Material.AIR);
+	private static Block PLACE_HOLDER = new Block(Material.AIR);
 	//--------------------------------Blocks--------------------------------//
 	public static final Block silver_block = PLACE_HOLDER;
 	public static final Block silver_ore = PLACE_HOLDER;
@@ -56,6 +59,11 @@ public final class ModBlocks {
 	public static final Block tourmaline_block = PLACE_HOLDER;
 	public static final Block malachite_block = PLACE_HOLDER;
 	public static final Block tigers_eye_block = PLACE_HOLDER;
+	public static final Block nuummite_block = PLACE_HOLDER;
+	public static final Block alexandrite_block = PLACE_HOLDER;
+	public static final Block jasper_block = PLACE_HOLDER;
+	public static final Block amethyst_block = PLACE_HOLDER;
+	public static final Block garnet_block = PLACE_HOLDER;
 	public static final Block cauldron = PLACE_HOLDER;
 	public static final Block candle_large = PLACE_HOLDER;
 	public static final Block candle_medium = PLACE_HOLDER;
@@ -67,10 +75,20 @@ public final class ModBlocks {
 	public static final Block apiary = PLACE_HOLDER;
 	public static final Block salt_ore = PLACE_HOLDER;
 	public static final Block gem_ore = PLACE_HOLDER;
+	public static final Block cypress_sapling = PLACE_HOLDER;
 	public static final Block chalk = PLACE_HOLDER;
 	public static final Block nethersteel = PLACE_HOLDER;
+	public static final Block fake_ice = PLACE_HOLDER;
+	public static final Block fake_ice_fence = PLACE_HOLDER;
+	public static final Block fake_ice_stairs = PLACE_HOLDER;
+	public static final Block fake_ice_slab_half = PLACE_HOLDER;
+	public static final Block fake_ice_slab_double = PLACE_HOLDER;
+	public static final Block torchwood = PLACE_HOLDER;
+	public static final Block ember_grass = PLACE_HOLDER;
+	private static Block STAIRS_ICE = new Block(Material.ICE);
 
 	private ModBlocks() {
+
 	}
 
 	public static void register(final IForgeRegistry<Block> registry) {
@@ -109,6 +127,14 @@ public final class ModBlocks {
 				new BlockSaltBarrier(),
 				new BlockApiary(),
 				new BlockAltar(),
+				new BlockTorchwood(),
+				new BlockEmberGrass(),
+				new BlockCypressSapling(),
+				new BlockFakeIce(),
+				new BlockFakeIceFence(),
+				new BlockFakeIceStairs("fake_ice_stairs", STAIRS_ICE.getDefaultState(), Material.ICE),
+				new BlockFakeIceSlabDouble("fake_ice_slab_double"),
+				new BlockFakeIceSlabHalf("fake_ice_slab_half"),
 				new BlockBeehive()
 		);
 		//Normal Blocks
@@ -120,6 +146,11 @@ public final class ModBlocks {
 				new BlockMod(LibBlockName.BLOODSTONE_BLOCK, Material.ROCK).setHardness(5.0F),
 				new BlockMod(LibBlockName.MALACHITE_BLOCK, Material.ROCK).setHardness(5.0F),
 				new BlockMod(LibBlockName.TIGERS_EYE_BLOCK, Material.ROCK).setHardness(5.0F),
+				new BlockMod(LibBlockName.NUUMMITE_BLOCK, Material.ROCK).setHardness(5.0F),
+				new BlockMod(LibBlockName.ALEXANDRITE_BLOCK, Material.ROCK).setHardness(5.0F),
+				new BlockMod(LibBlockName.JASPER_BLOCK, Material.ROCK).setHardness(5.0F),
+				new BlockMod(LibBlockName.AMETHYST_BLOCK, Material.ROCK).setHardness(5.0F),
+				new BlockMod(LibBlockName.GARNET_BLOCK, Material.ROCK).setHardness(5.0F),
 				new BlockMod(LibBlockName.COQUINA, Material.ROCK).setHardness(5.0F),
 				new BlockMod(LibBlockName.CHALK, Material.ROCK).setHardness(5.0F)
 		);

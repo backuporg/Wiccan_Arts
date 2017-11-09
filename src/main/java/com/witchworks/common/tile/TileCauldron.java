@@ -1,9 +1,9 @@
 package com.witchworks.common.tile;
 
+import com.google.common.collect.Lists;
 import com.witchworks.api.CauldronRegistry;
 import com.witchworks.api.brew.BrewEffect;
 import com.witchworks.api.brew.BrewUtils;
-import com.witchworks.api.helper.ItemNullHelper;
 import com.witchworks.api.recipe.BrewModifier;
 import com.witchworks.api.recipe.CauldronBrewRecipe;
 import com.witchworks.api.recipe.CauldronItemRecipe;
@@ -20,8 +20,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
@@ -34,6 +36,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
+import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
 import java.awt.*;
@@ -62,10 +65,48 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 	private int rgb = 0x12193b;
 	private RitualHolder ritual;
 	private Mode mode = Mode.NORMAL;
-	private ItemStack[] ingredients = ItemNullHelper.asArray(64);
+	private List<ItemStack> ingredients = new ArrayList<>();
 	private ItemStack container = ItemStack.EMPTY;
 	private int heat;
 	private int ticks;
+
+	public static Optional<EnumDyeColor> getDyeColor(ItemStack stack) {
+		for (int oreId : OreDictionary.getOreIDs(stack)) {
+			String name = OreDictionary.getOreName(oreId);
+			if (name.startsWith("blockWool")) {
+				name = name.substring(9, name.length());
+				return Optional.of(EnumDyeColor.valueOf(name));
+			}
+		}
+
+		return Optional.empty();
+	}
+
+	public static int blend(int a, int b, float ratio) {
+		if (ratio > 1f) {
+			ratio = 1f;
+		} else if (ratio < 0f) {
+			ratio = 0f;
+		}
+		float iRatio = 1.0f - ratio;
+
+		int aA = (a >> 24 & 0xff);
+		int aR = ((a & 0xff0000) >> 16);
+		int aG = ((a & 0xff00) >> 8);
+		int aB = (a & 0xff);
+
+		int bA = (b >> 24 & 0xff);
+		int bR = ((b & 0xff0000) >> 16);
+		int bG = ((b & 0xff00) >> 8);
+		int bB = (b & 0xff);
+
+		int A = ((int) (aA * iRatio) + (int) (bA * ratio));
+		int R = ((int) (aR * iRatio) + (int) (bR * ratio));
+		int G = ((int) (aG * iRatio) + (int) (bG * ratio));
+		int B = ((int) (aB * iRatio) + (int) (bB * ratio));
+
+		return A << 24 | R << 16 | G << 8 | B;
+	}
 
 	@SuppressWarnings("ConstantConditions")
 	public void collideItem(EntityItem entityItem) {
@@ -132,7 +173,7 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 
 	@SuppressWarnings("ConstantConditions")
 	public boolean processingLogic(ItemStack stack) {
-		if (!isBoiling() || hasIngredients() || stack.getCount() > 64) return false;
+		if (!isBoiling() || hasIngredients() || stack.getCount() > 8192) return false;
 		Map<Item, ItemValidator<ItemStack>> processing = CauldronRegistry.getItemProcessing(inv.getInnerFluid());
 		if (processing != null && processing.containsKey(stack.getItem())) {
 			ItemValidator<ItemStack> validator = processing.get(stack.getItem());
@@ -187,7 +228,7 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 	}
 
 	public boolean acceptIngredient(ItemStack stack) {
-		if (ingredients[ingredients.length - 1].isEmpty()) {
+		if (ingredients.size() < 8192) { //TODO: IS 64 THE MAX SIZE? //Response: No.
 			addIngredient(stack);
 			final float hue = world.rand.nextFloat();
 			final float saturation = (world.rand.nextInt(2000) + 1000) / 7000f;
@@ -205,7 +246,7 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 	}
 
 	public boolean hasIngredients() {
-		return !ingredients[0].isEmpty();
+		return !ingredients.isEmpty();
 	}
 
 	public float getParticleLevel() {
@@ -214,13 +255,8 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 	}
 
 	public void addIngredient(ItemStack stack) {
-		for (int i = 0; i < ingredients.length; i++) {
-			if (ingredients[i].isEmpty()) {
-				ingredients[i] = stack.copy();
-				stack.setCount(0);
-				break;
-			}
-		}
+		ingredients.add(stack.copy());
+		stack.setCount(0);
 	}
 
 	public void setContainer(ItemStack container) {
@@ -260,9 +296,8 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 				}
 			} else if (getContainer().isEmpty()) {
 				ItemStack copy = heldItem.copy();
-				copy.setCount(1);
 				setContainer(copy);
-				giveItem(player, hand, heldItem, ItemStack.EMPTY);
+				player.setHeldItem(hand, ItemStack.EMPTY);
 			}
 		}
 		return true;
@@ -359,7 +394,7 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 
 			WitchWorks.proxy.spawnParticle(ParticleF.CAULDRON_BUBBLE, posX, posY, posZ, 0, 0, 0, rgb);
 		}
-		if (hasIngredients() && ticks % 2 == 0) {
+		if (ticks % 2 == 0 && hasIngredients()) {
 			final float x = getPos().getX() + MathHelper.clamp(world.rand.nextFloat(), 0.2F, 0.9F);
 			float y = getParticleLevel();
 			final float z = getPos().getZ() + MathHelper.clamp(world.rand.nextFloat(), 0.2F, 0.9F);
@@ -379,7 +414,7 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 	private void tryTurnLiquid() {
 		if (!isBoiling() && hasIngredients() && inv.isFull()) {
 			Map<Item, FluidStack> fluids = CauldronRegistry.getFluidIngredients();
-			Item item = ingredients[0].getItem();
+			Item item = ingredients.get(0).getItem();
 
 			if (fluids.containsKey(item)) {
 				int count = 8;
@@ -428,13 +463,9 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 
 	private void saveItems(NBTTagCompound cmp) {
 		NBTTagList nbttaglist = new NBTTagList();
-		for (int i = 0; i < ingredients.length; ++i) {
-			if (!ingredients[i].isEmpty()) {
-				NBTTagCompound tag = new NBTTagCompound();
-				tag.setByte("slot", (byte) i);
-
-				ingredients[i].writeToNBT(tag);
-				nbttaglist.appendTag(tag);
+		for (ItemStack stack : ingredients) {
+			if (!stack.isEmpty()) {
+				nbttaglist.appendTag(stack.writeToNBT(new NBTTagCompound()));
 			}
 		}
 		cmp.setTag(TAG_INGREDIENTS, nbttaglist);
@@ -460,14 +491,10 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 
 	private void loadItems(NBTTagCompound cmp) {
 		NBTTagList nbttaglist = cmp.getTagList(TAG_INGREDIENTS, 10);
-		ingredients = ItemNullHelper.asArray(64);
-
-		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-			NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
-			int j = nbttagcompound.getByte("slot");
-
-			if (j >= 0 && j < ingredients.length) {
-				this.ingredients[j] = new ItemStack(nbttagcompound);
+		if (nbttaglist.hasNoTags()) ingredients.clear();
+		for (NBTBase nbt : nbttaglist) {
+			if (nbt instanceof NBTTagCompound) {
+				ingredients.add(new ItemStack((NBTTagCompound) nbt));
 			}
 		}
 
@@ -479,10 +506,12 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 		}
 	}
 
+	//------------------------------------Crafting Logic------------------------------------//
+
 	@SuppressWarnings("ConstantConditions")
 	@Override
 	public void onLiquidChange() {
-		ingredients = ItemNullHelper.asArray(64);
+		ingredients.clear();
 		mode = Mode.NORMAL;
 		ritual = null;
 		Fluid fluid = inv.getInnerFluid();
@@ -501,8 +530,6 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 	public void setColorRGB(int rgbIn) {
 		this.rgb = rgbIn;
 	}
-
-	//------------------------------------Crafting Logic------------------------------------//
 
 	public void setRitual(RitualHolder ritual) {
 		this.ritual = ritual;
@@ -549,10 +576,16 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 	}
 
 	public void potionCustomLogic(EntityPlayer player, EnumHand hand, ItemStack stack) {
-		ItemStack brew = new ItemStack(ModItems.brew_phial_drink);
+		boolean splash = ingredients.removeIf(s -> s.getItem() == Items.GUNPOWDER);
+		boolean linger = ingredients.removeIf(s -> s.getItem() == Items.DRAGON_BREATH);
+
 		NBTTagCompound tag = getBrewData();
 
 		if (tag != null) {
+			Item item = splash && !linger ? ModItems.brew_phial_splash
+					: linger && !splash ? ModItems.brew_phial_linger : ModItems.brew_phial_drink;
+
+			ItemStack brew = new ItemStack(item);
 			brew.setTagCompound(tag);
 			brew.setCount(1 + getBrewMultiplier(player));
 			giveItem(player, hand, stack, brew);
@@ -567,8 +600,20 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 		final Map<Item, ItemValidator<BrewModifier>> brewModifier = CauldronRegistry.getBrewModifiers();
 		List<Object> effects = new ArrayList<>();
 
-		for (int i = 0; i < ingredients.length; i++) {
-			ItemStack ingredient = ingredients[i];
+		int mix = 0xFFFFFF;
+
+		List<ItemStack> colors = Lists.newArrayList();
+		for (ItemStack ingredient : ingredients) {
+			Optional<EnumDyeColor> color = getDyeColor(ingredient);
+			if (color.isPresent()) {
+				mix = blend(mix, color.get().getColorValue(), 0.5F);
+				colors.add(ingredient);
+			}
+		}
+		ingredients.removeAll(colors);
+
+		for (int i = 0; i < ingredients.size(); i++) {
+			ItemStack ingredient = ingredients.get(i);
 			if (ingredient.isEmpty()) break;
 			Item effect = ingredient.getItem();
 			boolean add = true;
@@ -585,9 +630,9 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 			}
 			Object brew = copyBrew(optional.get());
 
-			if (i + 1 < ingredients.length) {
-				while (i + 1 < ingredients.length) {
-					ItemStack modifier = ingredients[i + 1];
+			if (i + 1 < ingredients.size()) {
+				while (i + 1 < ingredients.size()) {
+					ItemStack modifier = ingredients.get(i + 1);
 
 					if (!brewModifier.containsKey(modifier.getItem())) {
 						if (brewEffect.containsKey(modifier.getItem()) || modifier.isEmpty()) break;
@@ -613,7 +658,9 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 				effects.add(brew);
 		}
 
-		return BrewUtils.serialize(effects);
+		NBTTagCompound tag = BrewUtils.serialize(effects);
+		tag.setInteger(BrewUtils.BREW_COLOR, mix);
+		return tag;
 	}
 
 	private Object copyBrew(Object brew) {
@@ -631,7 +678,7 @@ public class TileCauldron extends TileFluidInventory implements ITickable {
 		onLiquidChange();
 
 		world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(getPos()).grow(2))
-				.forEach(entity -> entity.attackEntityFrom(DamageSource.MAGIC, ingredients.length / 2));
+				.forEach(entity -> entity.attackEntityFrom(DamageSource.MAGIC, ingredients.size() / 2));
 	}
 
 	//------------------------------------Crafting Logic------------------------------------//
